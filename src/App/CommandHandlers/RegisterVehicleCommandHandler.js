@@ -31,6 +31,7 @@ class RegisterVehicleCommandHandler {
     fleet.registerVehicle(vehicleId);
     vehicle.registerToFleet(fleetId);
 
+    // TODO: use transaction
     await this.vehicleRepository.save(vehicle);
     await this.fleetRepository.save(fleet);
 
