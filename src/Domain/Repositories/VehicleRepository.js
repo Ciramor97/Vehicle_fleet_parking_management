@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class VehicleRepository {
   save(vehicle) {
     throw new Error("Method not implemented");

@@ -1,4 +1,6 @@
-class InMemoryFleetRepository {
+const FleetRepository = require("../../Domain/Repositories/FleetRepository");
+
+class InMemoryFleetRepository extends FleetRepository {
   constructor() {
     super();
     this.fleets = new Map();
@@ -12,6 +14,7 @@ class InMemoryFleetRepository {
   findById(id) {
     return this.fleets.get(id) || null;
   }
+
   findByUserId(userId) {
     return Array.from(this.fleets.values()).filter(
       (fleet) => fleet.userId === userId
@@ -22,3 +25,5 @@ class InMemoryFleetRepository {
     this.fleets.clear();
   }
 }
+
+module.exports = InMemoryFleetRepository;

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 class FleetRepository {
   save(fleet) {
     throw new Error("Method not implemented");
@@ -9,3 +11,5 @@ class FleetRepository {
     throw new Error("Method not implemented");
   }
 }
+
+module.exports = FleetRepository;

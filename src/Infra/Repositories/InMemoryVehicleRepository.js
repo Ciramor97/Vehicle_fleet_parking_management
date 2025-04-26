@@ -1,4 +1,6 @@
-class InMemoryVehicleRepository {
+const VehicleRepository = require("../../Domain/Repositories/VehicleRepository");
+
+class InMemoryVehicleRepository extends VehicleRepository {
   constructor() {
     super();
     this.vehicles = new Map();

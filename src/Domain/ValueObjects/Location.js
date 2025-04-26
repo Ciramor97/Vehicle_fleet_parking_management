@@ -1,5 +1,4 @@
 //localize on planet earth
-
 class Location {
   constructor(latitude, longitude) {
     this._latitude = latitude;
@@ -36,3 +35,5 @@ class Location {
     );
   }
 }
+
+module.exports = Location;
