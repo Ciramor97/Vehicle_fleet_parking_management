@@ -5,7 +5,7 @@ class Vehicle {
     }
     this._id = id;
     this._plateNumber = plateNumber;
-    this._curentLocation = null;
+    this._currentLocation = null;
     this._fleetIds = new Set();
   }
 
@@ -42,10 +42,11 @@ class Vehicle {
       throw new Error(`Vehicle is not registered to this fleet ${fleetId}`);
     }
 
-    if (!this.currentLocation || this.currentLocation.equals(location)) {
+    if (this._currentLocation && this._currentLocation.equals(location)) {
       throw new Error(`Vehicle is already parked at this location ${location}`);
     }
     this._currentLocation = location;
+
     return true;
   }
 }

@@ -1,8 +1,8 @@
 //localize on planet earth
 class Location {
   constructor(latitude, longitude) {
-    this._latitude = latitude;
-    this._longitude = longitude;
+    this._latitude = parseFloat(latitude);
+    this._longitude = parseFloat(longitude);
 
     if (isNaN(this._latitude) || isNaN(this._longitude)) {
       throw new Error("Location requires valid numeric coordinates");
@@ -31,8 +31,13 @@ class Location {
     }
 
     return (
-      this._latitude === other.latitude && this._longitude === other.longitude
+      this._latitude === other.getLatitude() &&
+      this._longitude === other.getLongitude()
     );
+  }
+
+  toString() {
+    return `(${this._latitude}, ${this._longitude})`;
   }
 }
 

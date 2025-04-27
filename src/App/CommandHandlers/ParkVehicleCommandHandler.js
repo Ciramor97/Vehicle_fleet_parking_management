@@ -11,9 +11,9 @@ class ParkVehicleCommandHandler {
   }
 
   async execute(command) {
-    const { vehicleId, fleetId, longitude, latitude } = command;
+    const { fleetId, vehicleId, latitude, longitude } = command;
 
-    const location = new Location(longitude, latitude);
+    const location = new Location(latitude, longitude);
 
     const [fleet, vehicle] = await Promise.all([
       this.fleetRepository.findById(fleetId),
@@ -32,11 +32,16 @@ class ParkVehicleCommandHandler {
     }
 
     if (vehicle.currentLocation && vehicle.currentLocation.equals(location)) {
-      throw new VehicleAlreadyParkedHereException(vehicle.id, location);
+      throw new VehicleAlreadyParkedHereException(
+        vehicleId,
+        location.toString()
+      );
     }
 
-    vehicle.parkAt(location, fleet.id);
+    vehicle.parkAt(location, fleetId);
     await this.vehicleRepository.save(vehicle);
     return { success: true };
   }
 }
+
+module.exports = ParkVehicleCommandHandler;

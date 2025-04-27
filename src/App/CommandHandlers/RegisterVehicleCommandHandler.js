@@ -3,13 +3,13 @@ const {
 } = require("../../Domain/Exceptions/DomainException");
 
 class RegisterVehicleCommandHandler {
-  constructor(vehicleRepository) {
+  constructor(vehicleRepository, fleetRepository) {
     this.vehicleRepository = vehicleRepository;
     this.fleetRepository = fleetRepository;
   }
 
   async execute(command) {
-    const { vehicleId, fleetId } = command;
+    const { fleetId, vehicleId } = command;
 
     const [fleet, vehicle] = await Promise.all([
       this.fleetRepository.findById(fleetId),
