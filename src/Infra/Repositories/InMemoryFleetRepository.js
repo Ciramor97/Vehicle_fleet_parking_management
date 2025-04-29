@@ -20,10 +20,6 @@ class InMemoryFleetRepository extends FleetRepository {
       (fleet) => fleet.userId === userId
     );
   }
-
-  clear() {
-    this.fleets.clear();
-  }
 }
 
 module.exports = InMemoryFleetRepository;

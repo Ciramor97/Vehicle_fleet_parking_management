@@ -7,6 +7,10 @@ class VehicleRepository {
   findById(id) {
     throw new Error("Method not implemented");
   }
+
+  findByPlateNumber(plateNumber) {
+    throw new Error("Method not implemented");
+  }
 }
 
 module.exports = VehicleRepository;

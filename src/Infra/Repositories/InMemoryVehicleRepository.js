@@ -15,8 +15,13 @@ class InMemoryVehicleRepository extends VehicleRepository {
     return this.vehicles.get(id) || null;
   }
 
-  clear() {
-    this.vehicles.clear();
+  findByPlateNumber(plateNumber) {
+    for (const vehicle of this.vehicles.values()) {
+      if (vehicle.plateNumber === plateNumber) {
+        return vehicle;
+      }
+    }
+    return null;
   }
 }
 
