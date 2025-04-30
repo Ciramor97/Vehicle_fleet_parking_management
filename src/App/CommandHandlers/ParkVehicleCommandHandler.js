@@ -1,8 +1,8 @@
-const Location = require("../../Domain/ValueObjects/Location");
+const Location = require('../../Domain/ValueObjects/Location');
 const {
   VehicleNotInFleetException,
-  VehicleAlreadyParkedHereException,
-} = require("../../Domain/Exceptions/DomainException");
+  VehicleAlreadyParkedHereException
+} = require('../../Domain/Exceptions/DomainException');
 
 class ParkVehicleCommandHandler {
   constructor(vehicleRepository, fleetRepository) {
@@ -17,7 +17,7 @@ class ParkVehicleCommandHandler {
 
     const [fleet, vehicle] = await Promise.all([
       this.fleetRepository.findById(fleetId),
-      this.vehicleRepository.findById(vehicleId),
+      this.vehicleRepository.findById(vehicleId)
     ]);
 
     if (!vehicle) {
@@ -34,7 +34,7 @@ class ParkVehicleCommandHandler {
     if (vehicle.currentLocation && vehicle.currentLocation.equals(location)) {
       throw new VehicleAlreadyParkedHereException(
         vehicleId,
-        location.toString(),
+        location.toString()
       );
     }
 

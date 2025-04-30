@@ -1,4 +1,4 @@
-const VehicleRepository = require("../../Domain/Repositories/VehicleRepository");
+const VehicleRepository = require('../../Domain/Repositories/VehicleRepository');
 
 class InMemoryVehicleRepository extends VehicleRepository {
   constructor() {

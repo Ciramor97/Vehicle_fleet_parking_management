@@ -1,6 +1,6 @@
 const {
-  VehicleNotInFleetException,
-} = require("../../Domain/Exceptions/DomainException");
+  VehicleNotInFleetException
+} = require('../../Domain/Exceptions/DomainException');
 
 class GetVehicleLocationQueryHandler {
   constructor(vehicleRepository, fleetRepository) {
@@ -13,7 +13,7 @@ class GetVehicleLocationQueryHandler {
 
     const [fleet, vehicle] = await Promise.all([
       this.fleetRepository.findById(fleetId),
-      this.vehicleRepository.findById(vehicleId),
+      this.vehicleRepository.findById(vehicleId)
     ]);
 
     if (!vehicle) {
@@ -31,7 +31,7 @@ class GetVehicleLocationQueryHandler {
       vehicle.currentLocation && {
         vehicleId,
         latitude: vehicle.currentLocation.latitude,
-        longitude: vehicle.currentLocation.longitude,
+        longitude: vehicle.currentLocation.longitude
       }
     );
   }

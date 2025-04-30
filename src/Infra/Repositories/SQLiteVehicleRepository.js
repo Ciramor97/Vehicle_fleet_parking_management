@@ -1,13 +1,13 @@
-const Vehicle = require("../../Domain/Models/Vehicle");
-const VehicleRepository = require("../../Domain/Repositories/VehicleRepository");
-const sqlite3 = require("sqlite3").verbose();
+const Vehicle = require('../../Domain/Models/Vehicle');
+const VehicleRepository = require('../../Domain/Repositories/VehicleRepository');
+const sqlite3 = require('sqlite3').verbose();
 
 class SQLiteVehicleRepository extends VehicleRepository {
-  constructor(dbPath = "./parking.db") {
+  constructor(dbPath = './parking.db') {
     super();
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("Error opening database " + err.message);
+        console.error('Error opening database ' + err.message);
       } else {
         this.createTables();
       }
@@ -41,7 +41,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
       this.db.run(
         sql,
         [vehicle.id, vehicle.plateNumber, vehicle.currentLocation],
-        (err) => (err ? reject(err) : resolve()),
+        (err) => (err ? reject(err) : resolve())
       );
     });
 
@@ -49,7 +49,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
       this.db.run(
         `DELETE FROM fleet_vehicles WHERE vehicleId = ?`,
         [vehicle._id],
-        (err) => (err ? reject(err) : resolve()),
+        (err) => (err ? reject(err) : resolve())
       );
     });
 
@@ -58,7 +58,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
         this.db.run(
           `INSERT INTO fleet_vehicles (vehicleId, fleetId) VALUES (?, ?)`,
           [vehicle._id, fleetId],
-          (err) => (err ? reject(err) : resolve()),
+          (err) => (err ? reject(err) : resolve())
         );
       });
     }
@@ -69,7 +69,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
   async findById(id) {
     const vehicleRow = await new Promise((resolve, reject) => {
       this.db.get(`SELECT * FROM vehicles WHERE id = ?`, [id], (err, row) =>
-        err ? reject(err) : resolve(row),
+        err ? reject(err) : resolve(row)
       );
     });
 
@@ -79,8 +79,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
       this.db.all(
         `SELECT fleetId FROM fleet_vehicles WHERE vehicleId = ?`,
         [id],
-        (err, rows) =>
-          err ? reject(err) : resolve(rows.map((r) => r.fleetId)),
+        (err, rows) => (err ? reject(err) : resolve(rows.map((r) => r.fleetId)))
       );
     });
 
@@ -96,7 +95,7 @@ class SQLiteVehicleRepository extends VehicleRepository {
       this.db.get(
         `SELECT * FROM vehicles WHERE plateNumber = ?`,
         [plateNumber],
-        (err, r) => (err ? reject(err) : resolve(r)),
+        (err, r) => (err ? reject(err) : resolve(r))
       );
     });
 

@@ -1,4 +1,4 @@
-const Fleet = require("../Models/Fleet");
+const Fleet = require('../Models/Fleet');
 
 class FleetFactory {
   static create(id, userId) {

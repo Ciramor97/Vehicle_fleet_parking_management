@@ -1,6 +1,6 @@
 const {
-  VehicleAlreadyRegisteredException,
-} = require("../../Domain/Exceptions/DomainException");
+  VehicleAlreadyRegisteredException
+} = require('../../Domain/Exceptions/DomainException');
 
 class RegisterVehicleCommandHandler {
   constructor(vehicleRepository, fleetRepository) {
@@ -13,7 +13,7 @@ class RegisterVehicleCommandHandler {
 
     const [fleet, vehicle] = await Promise.all([
       this.fleetRepository.findById(fleetId),
-      this.vehicleRepository.findById(vehicleId),
+      this.vehicleRepository.findById(vehicleId)
     ]);
 
     if (!vehicle) {

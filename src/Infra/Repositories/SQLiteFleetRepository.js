@@ -1,13 +1,13 @@
-const sqlite3 = require("sqlite3").verbose();
-const FleetRepository = require("../../Domain/Repositories/FleetRepository");
-const Fleet = require("../../Domain/Models/Fleet");
+const sqlite3 = require('sqlite3').verbose();
+const FleetRepository = require('../../Domain/Repositories/FleetRepository');
+const Fleet = require('../../Domain/Models/Fleet');
 
 class SQLiteFleetRepository extends FleetRepository {
-  constructor(dbPath = "./parking.db") {
+  constructor(dbPath = './parking.db') {
     super();
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("Error opening database " + err.message);
+        console.error('Error opening database ' + err.message);
       } else {
         this.createTables();
       }
@@ -16,7 +16,7 @@ class SQLiteFleetRepository extends FleetRepository {
 
   createTables() {
     this.db.serialize(() => {
-      console.log("Creating tables if they do not exist...");
+      console.log('Creating tables if they do not exist...');
       this.db.run(`
         CREATE TABLE IF NOT EXISTS fleets (
           id TEXT PRIMARY KEY,
@@ -39,7 +39,7 @@ class SQLiteFleetRepository extends FleetRepository {
     await new Promise((resolve, reject) => {
       const sql = `INSERT INTO fleets (id, userId) VALUES (?, ?)`;
       this.db.run(sql, [fleet.id, fleet.userId], (err) =>
-        err ? reject(err) : resolve(),
+        err ? reject(err) : resolve()
       );
     });
 
@@ -47,7 +47,7 @@ class SQLiteFleetRepository extends FleetRepository {
       this.db.run(
         `DELETE FROM fleet_vehicles WHERE fleetId = ?`,
         [fleet.id],
-        (err) => (err ? reject(err) : resolve()),
+        (err) => (err ? reject(err) : resolve())
       );
     });
 
@@ -56,7 +56,7 @@ class SQLiteFleetRepository extends FleetRepository {
         this.db.run(
           `INSERT INTO fleet_vehicles (vehicleId, fleetId) VALUES (?, ?)`,
           [vehicleId, fleet.id],
-          (err) => (err ? reject(err) : resolve()),
+          (err) => (err ? reject(err) : resolve())
         );
       });
     }
@@ -66,7 +66,7 @@ class SQLiteFleetRepository extends FleetRepository {
   async findById(id) {
     const fleetRow = await new Promise((resolve, reject) => {
       this.db.get(`SELECT * FROM fleets WHERE id = ?`, [id], (err, row) =>
-        err ? reject(err) : resolve(row),
+        err ? reject(err) : resolve(row)
       );
     });
 
@@ -77,7 +77,7 @@ class SQLiteFleetRepository extends FleetRepository {
         `SELECT vehicleId FROM fleet_vehicles WHERE fleetId = ?`,
         [id],
         (err, rows) =>
-          err ? reject(err) : resolve(rows.map((r) => r.vehicleId)),
+          err ? reject(err) : resolve(rows.map((r) => r.vehicleId))
       );
     });
 

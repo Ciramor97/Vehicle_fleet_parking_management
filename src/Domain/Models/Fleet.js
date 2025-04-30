@@ -1,7 +1,7 @@
 class Fleet {
   constructor(id, userId) {
     if (!id || !userId) {
-      throw new Error("Fleet id must be provided and userId must be provided");
+      throw new Error('Fleet id must be provided and userId must be provided');
     }
     this._id = id;
     this._userId = userId;
@@ -27,7 +27,7 @@ class Fleet {
   registerVehicle(vehicleId) {
     if (this.hasVehicle(vehicleId)) {
       throw new Error(
-        `Vehicle ${vehicleId} is already registered to this fleet`,
+        `Vehicle ${vehicleId} is already registered to this fleet`
       );
     }
     this._vehicleIds.add(vehicleId);

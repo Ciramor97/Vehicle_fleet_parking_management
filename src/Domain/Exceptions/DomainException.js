@@ -28,5 +28,5 @@ module.exports = {
   DomainException,
   VehicleAlreadyRegisteredException,
   VehicleNotInFleetException,
-  VehicleAlreadyParkedHereException,
+  VehicleAlreadyParkedHereException
 };

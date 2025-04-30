@@ -1,7 +1,7 @@
 class Vehicle {
   constructor(id, plateNumber) {
     if (!id || !plateNumber) {
-      throw new Error("Vehicle requires an id and a plate number");
+      throw new Error('Vehicle requires an id and a plate number');
     }
     this._id = id;
     this._plateNumber = plateNumber;

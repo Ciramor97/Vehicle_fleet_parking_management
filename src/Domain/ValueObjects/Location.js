@@ -5,13 +5,13 @@ class Location {
     this._longitude = parseFloat(longitude);
 
     if (isNaN(this._latitude) || isNaN(this._longitude)) {
-      throw new Error("Location requires valid numeric coordinates");
+      throw new Error('Location requires valid numeric coordinates');
     }
     if (this._latitude < -90 || this._latitude > 90) {
-      throw new Error("Latitude must be between -90 and 90 degrees");
+      throw new Error('Latitude must be between -90 and 90 degrees');
     }
     if (this._longitude < -180 || this._longitude > 180) {
-      throw new Error("Longitude must be between -180 and 180 degrees");
+      throw new Error('Longitude must be between -180 and 180 degrees');
     }
 
     Object.freeze(this);

@@ -1,4 +1,4 @@
-const Vehicle = require("../Models/Vehicle");
+const Vehicle = require('../Models/Vehicle');
 
 class VehicleFactory {
   static create(id, plateNumber) {
