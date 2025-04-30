@@ -3,9 +3,15 @@ const { v4: uuidv4 } = require("uuid");
 //factories
 const FleetFactory = require("./src/Domain/Factories/FleetFactory");
 const VehicleFactory = require("./src/Domain/Factories/VehicleFactory");
-// repositories
+
+// memory repositories
 const InMemoryFleetRepository = require("./src/Infra/Repositories/InMemoryFleetRepository");
 const InMemoryVehicleRepository = require("./src/Infra/Repositories/InMemoryVehicleRepository");
+
+// sqlite repositories
+// const SQLiteFleetRepository = require("./src/Infra/Repositories/SQLiteFleetRepository");
+// const SQLiteVehicleRepository = require("./src/Infra/Repositories/SqLiteVehicleRepository");
+
 // commands
 const RegisterVehicleCommand = require("./src/App/Commands/RegisterVehicleCommand");
 const ParkVehicleCommand = require("./src/App/Commands/ParkVehicleCommand");
@@ -17,21 +23,25 @@ const ParkVehicleCommandHandler = require("./src/App/CommandHandlers/ParkVehicle
 const vehicleRepository = new InMemoryVehicleRepository();
 const fleetRepository = new InMemoryFleetRepository();
 
+// use sqlite repositories instead of in-memory for persistent storage
+// const vehicleRepository = new SQLiteVehicleRepository();
+// const fleetRepository = new SQLiteFleetRepository();
+
 //create command handlers
 const registerVehicleCommandHandler = new RegisterVehicleCommandHandler(
   vehicleRepository,
-  fleetRepository
+  fleetRepository,
 );
 const parkVehicleCommandHandler = new ParkVehicleCommandHandler(
   vehicleRepository,
-  fleetRepository
+  fleetRepository,
 );
 
 async function registerVehicleIntoFleet(vehicleId, fleetId) {
   try {
     const registerVehicleCommand = new RegisterVehicleCommand(
       fleetId,
-      vehicleId
+      vehicleId,
     );
     await registerVehicleCommandHandler.execute(registerVehicleCommand);
     console.log(`Registered vehicle ${vehicleId} to fleet ${fleetId}`);
@@ -46,11 +56,11 @@ async function parkVehicleInFleet(vehicleId, fleetId, latitude, longitude) {
       fleetId,
       vehicleId,
       latitude,
-      longitude
+      longitude,
     );
     await parkVehicleCommandHandler.execute(parkVehicleCommand);
     console.log(
-      `Parked vehicle ${vehicleId} in fleet ${fleetId} at location (${latitude}, ${longitude})`
+      `Parked vehicle ${vehicleId} in fleet ${fleetId} at location (${latitude}, ${longitude})`,
     );
   } catch (error) {
     console.error(`Failed to park vehicle: ${error.message}`);
@@ -60,6 +70,7 @@ async function parkVehicleInFleet(vehicleId, fleetId, latitude, longitude) {
 async function main() {
   console.log("Vehicle fleet parking management demo started.");
 
+  // await initDatabase();
   const userId = uuidv4();
   console.log(`Created user with ID: ${userId}`);
 

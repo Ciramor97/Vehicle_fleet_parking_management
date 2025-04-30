@@ -17,7 +17,7 @@ class InMemoryFleetRepository extends FleetRepository {
 
   findByUserId(userId) {
     return Array.from(this.fleets.values()).filter(
-      (fleet) => fleet.userId === userId
+      (fleet) => fleet.userId === userId,
     );
   }
 }

@@ -36,7 +36,7 @@ When(
   "this vehicle has been registered into the other user's fleet",
   async function () {
     await this.registerVehicle(otherFleetId, this.vehicleId);
-  }
+  },
 );
 
 Then("this vehicle should be part of my vehicle fleet", async function () {
@@ -53,7 +53,7 @@ Then(
   function () {
     expect(this.error).to.not.be.null;
     expect(this.error.message).to.include("already");
-  }
+  },
 );
 
 Then("Register same vehicle to two different fleet", async function () {

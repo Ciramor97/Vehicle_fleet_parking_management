@@ -34,7 +34,7 @@ class ParkVehicleCommandHandler {
     if (vehicle.currentLocation && vehicle.currentLocation.equals(location)) {
       throw new VehicleAlreadyParkedHereException(
         vehicleId,
-        location.toString()
+        location.toString(),
       );
     }
 

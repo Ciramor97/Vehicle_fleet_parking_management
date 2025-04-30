@@ -27,7 +27,7 @@ class Fleet {
   registerVehicle(vehicleId) {
     if (this.hasVehicle(vehicleId)) {
       throw new Error(
-        `Vehicle ${vehicleId} is already registered to this fleet`
+        `Vehicle ${vehicleId} is already registered to this fleet`,
       );
     }
     this._vehicleIds.add(vehicleId);

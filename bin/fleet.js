@@ -14,18 +14,16 @@ const ParkVehicleCommandHandler = require("../src/App/CommandHandlers/ParkVehicl
 const InMemoryFleetRepository = require("../src/Infra/Repositories/InMemoryFleetRepository");
 const InMemoryVehicleRepository = require("../src/Infra/Repositories/InMemoryVehicleRepository");
 
-// Create repositories
 const fleetRepository = new InMemoryFleetRepository();
 const vehicleRepository = new InMemoryVehicleRepository();
 
-// Create command handlers
 const registerVehicleHandler = new RegisterVehicleCommandHandler(
   vehicleRepository,
-  fleetRepository
+  fleetRepository,
 );
 const parkVehicleHandler = new ParkVehicleCommandHandler(
   vehicleRepository,
-  fleetRepository
+  fleetRepository,
 );
 
 program
@@ -63,7 +61,7 @@ program
       await registerVehicleHandler.execute(command);
 
       console.log(
-        `Vehicle ${vehiclePlateNumber} registered to fleet ${fleetId}`
+        `Vehicle ${vehiclePlateNumber} registered to fleet ${fleetId}`,
       );
     } catch (error) {
       console.error(`Error: ${error.message}`);
@@ -79,12 +77,11 @@ program
   .argument("<lng>", "Longitude")
   .action(async (fleetId, vehiclePlateNumber, lat, lng) => {
     try {
-      const vehicle = await vehicleRepository.findByPlateNumber(
-        vehiclePlateNumber
-      );
+      const vehicle =
+        await vehicleRepository.findByPlateNumber(vehiclePlateNumber);
       if (!vehicle) {
         throw new Error(
-          `Vehicle with plate number ${vehiclePlateNumber} not found`
+          `Vehicle with plate number ${vehiclePlateNumber} not found`,
         );
       }
 
@@ -92,12 +89,12 @@ program
         fleetId,
         vehicle.id,
         parseFloat(lat),
-        parseFloat(lng)
+        parseFloat(lng),
       );
       await parkVehicleHandler.execute(command);
 
       console.log(
-        `Vehicle ${vehiclePlateNumber} localized at (${lat}, ${lng})`
+        `Vehicle ${vehiclePlateNumber} localized at (${lat}, ${lng})`,
       );
     } catch (error) {
       console.error(`Error: ${error.message}`);

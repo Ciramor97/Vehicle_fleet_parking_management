@@ -17,11 +17,11 @@ class GetFleetVehiclesQueryHandler {
           const vehicle = this.vehicleRepository.findById(vehicleId);
           if (!vehicle) {
             throw new Error(
-              `Vehicle ${vehicleId} not found in fleet ${fleetId}`
+              `Vehicle ${vehicleId} not found in fleet ${fleetId}`,
             );
           }
           return vehicle;
-        })
+        }),
       );
 
       return vehicles.map((vehicle) => ({
@@ -34,7 +34,7 @@ class GetFleetVehiclesQueryHandler {
       }));
     } catch (error) {
       throw new Error(
-        `Failed to get vehicles for fleet ID ${fleetId}: ${error.message}`
+        `Failed to get vehicles for fleet ID ${fleetId}: ${error.message}`,
       );
     }
   }

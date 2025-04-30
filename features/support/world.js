@@ -17,12 +17,12 @@ class FleetParkingWorld {
 
     this.registerVehicleHandler = new RegisterVehicleCommandHandler(
       this.vehicleRepository,
-      this.fleetRepository
+      this.fleetRepository,
     );
 
     this.parkVehicleHandler = new ParkVehicleCommandHandler(
       this.vehicleRepository,
-      this.fleetRepository
+      this.fleetRepository,
     );
 
     this.myUserId = uuidv4();
@@ -64,7 +64,7 @@ class FleetParkingWorld {
         fleetId,
         vehicleId,
         latitude,
-        longitude
+        longitude,
       );
       await this.parkVehicleHandler.execute(command);
     } catch (err) {

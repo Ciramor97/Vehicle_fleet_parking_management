@@ -10,7 +10,7 @@ Given("my vehicle has been parked into this location", async function () {
     this.myFleetId,
     this.vehicleId,
     this.location.getLatitude(),
-    this.location.getLongitude()
+    this.location.getLongitude(),
   );
 });
 
@@ -19,7 +19,7 @@ When("I park my vehicle at this location", async function () {
     this.myFleetId,
     this.vehicleId,
     this.location.getLatitude(),
-    this.location.getLongitude()
+    this.location.getLongitude(),
   );
 });
 
@@ -28,7 +28,7 @@ When("I try to park my vehicle at this location", async function () {
     this.myFleetId,
     this.vehicleId,
     this.location.getLatitude(),
-    this.location.getLongitude()
+    this.location.getLongitude(),
   );
 });
 
@@ -39,9 +39,9 @@ Then(
 
     expect(vehicle.currentLocation).to.not.be.null;
     expect(vehicle.currentLocation.getLatitude()).to.equal(
-      this.location.getLatitude()
+      this.location.getLatitude(),
     );
-  }
+  },
 );
 
 Then(
@@ -49,5 +49,5 @@ Then(
   function () {
     expect(this.error).to.not.be.null;
     expect(this.error.message).to.include("already parked");
-  }
+  },
 );
